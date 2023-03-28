@@ -1,8 +1,8 @@
-<%@ page import="com.kh.member.model.vo.Member"%>
+<%@ page import="com.kh.board.model.vo.Board, com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Member loginUser = (Member) session.getAttribute("loginUser");
+	Board b= (Board) request.getAttribute("b");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,21 +56,21 @@
 </style>
 </head>
 <body>
-<%@ include file= "../../admin/adminMenubar.jsp" %>
 
- 	<div class="container">
+<%@ include file= "../../admin/adminMenubar.jsp" %>
+	<div class="container">
         <div class="item profile">
             <div class="profile_img" style="background-color: gray;"></div>
             <div style="font-weight: bold;">관리자님</div>
         </div>
         <div class="item notice">
-            <h2 class="master_notice_title">공지사항 작성하기</h2>
-            <form action="<%= request.getContextPath() %>/insert.no" method="post" style="border: 1px solid gray;">
-                <input type="hidden" name="userNo" value="<%= loginUser.getUserNo()%>">
-                <table class="notice_enroll">
+            <h2 class="master_notice_title">공지사항 수정하기</h2>
+            <form action="<%= request.getContextPath() %>/update.no" method="post" style="border: 1px solid gray;">
+                <input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
+                <table class="notice_update">
                     <tr>
-                        <td width="80px">글제목</td>
-                        <td width="280px"><input type="text" name="title"></td>
+                        <td width="80px">제목</td>
+                        <td width="280px"><input type="text" name="title" required value="<%= b.getBoardTitle()%>"></td>
                     </tr>
                     <tr>
                         <td>글내용</td>
@@ -78,21 +78,18 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <textarea class="notice-content" name="content" rows="10" style="resize:none;" required >
-                            </textarea>
+                            <textarea class="notice-content" name="content" rows="10" style="resize:none;" required ><%= b.getBoardContent() %></textarea>
                         </td>
                     </tr>
                 </table>
                 
                 <div class="btn-area">
-	                <button type="submit" class="btn btn-secondary btn-sm">등록하기</button>
+	                <button type="submit" class="btn btn-secondary btn-sm">수정하기</button>
 	                <button type="button" class="btn btn-primary btn-sm" onclick="history.back();">뒤로가기</button>
                 </div>
             </form>
         </div>
     </div>
-
-
 
 
 </body>

@@ -80,7 +80,7 @@ public class PetDao {
 			if(rset.next()) {
 				p = new Pet();
 				p.setSpecies(rset.getString("SPECIES"));
-
+				p.setUserNo(userNo);
 			}
 			
 		} catch (SQLException e) {

@@ -22,5 +22,54 @@ public class NoticeService {
 		
 	}
 	
+	public int insertNotice(Board b) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().insertNotice(conn, b);
+		
+		if(result > 0) {
+			
+			commit(conn);
+			
+			result = new NoticeDao().selectNoticeNo(conn);
+			
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+		
+	}
 	
+	public int increaseCount(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().increaseCount(conn, bno);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	public Board selectNotice(int bno) {
+		
+		Connection conn = getConnection();
+		
+		Board b = new NoticeDao().selectNotice(conn, bno);
+		
+		close(conn);
+		
+		return b;
+		
+	}
+
 }

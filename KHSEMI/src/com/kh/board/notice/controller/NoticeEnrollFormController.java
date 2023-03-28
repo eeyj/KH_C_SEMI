@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.board.model.vo.Board;
+import com.kh.board.notice.model.service.NoticeService;
 
 /**
  * Servlet implementation class NoticeEnrollFormController
@@ -34,8 +38,33 @@ public class NoticeEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
+		
+		request.setCharacterEncoding("UTF-8");
+
+		String noticeTitle = request.getParameter("title");
+		String noticdContent = request.getParameter("content");
+		String userNo = request.getParameter("userNo");
+		
+		Board b = new Board();
+		b.setBoardTitle(noticeTitle);
+		b.setBoardContent(noticdContent);
+		b.setBoardWriter(userNo);
+		
+		int result = new NoticeService().insertNotice(b);	
+		
+		HttpSession session = request.getSession();
+		
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath()+"/detail.no?nno=" + result);
+		} else {
+			session.setAttribute("alertMsg", "공지사항 등록 실패");
+			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			
+		}
+		
+		
 	}
 
 }

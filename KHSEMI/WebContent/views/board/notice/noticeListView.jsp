@@ -60,6 +60,9 @@
             color: black;
             margin-bottom: 10px;
         }
+        .notice_table>tbody>tr:hover{
+        	cursor:pointer;
+        }
 </style>
 
 </head>
@@ -89,28 +92,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                   <!--  <tr>
-                        <td>1</td>
-                        <td>또오개냥 공지사항1</td>
-                        <td>관리자</td>
-                        <td>2023-03-22</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>또오개냥 공지사항2</td>
-                        <td>관리자</td>
-                        <td>2023-03-22</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>또오개냥 공지사항3</td>
-                        <td>관리자</td>
-                        <td>2023-03-22</td>
-                        <td>10</td>
-                    </tr> -->
-                    
                     <% if(list.isEmpty()){ %>
                     	<tr>
                     		<td colspan="5">존재하는 공자사항이 없습니다.</td>
@@ -134,7 +115,20 @@
             </table>
         </div>
     </div>
-
+	
+	<script>
+		$(function(){
+			$(".notice_table>tbody>tr").click(function(){
+				let bno = $(this).children().eq(0).text();
+				
+				location.href = "<%= request.getContextPath()%>/detail.no?bno="+bno;
+			});
+		});
+		
+	
+	</script>
+	
+	
 
 </body>
 </html>

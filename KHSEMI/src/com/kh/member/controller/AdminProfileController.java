@@ -68,8 +68,8 @@ public class AdminProfileController extends HttpServlet {
 		p.setUserNo(userNo);
 		p.setSpecies(pet);
 		
-		Member updateMem = new MemberService().updateMember(m);
 		Pet updatePet = new PetService().updatePet(p);
+		Member updateMem = new MemberService().updateMember(m);
 		
 		if(updateMem == null) {
 			request.setAttribute("errorMsg", "관리자정보 수정 실패");
