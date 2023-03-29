@@ -45,7 +45,7 @@
 <body>
 	
    <div class="logo">
-        <a href=""><img src="resources/logo2.png" width="210px" ></a>
+        <a href="<%= request.getContextPath() %>"><img src="resources/logo2.png" width="210px" ></a>
     </div>
         
     <div class="nav-area" style="margin-bottom: 20px;">

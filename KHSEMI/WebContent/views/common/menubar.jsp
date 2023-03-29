@@ -131,7 +131,7 @@
 		<% } %>
 	</div>
 	<script>
-		<% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
+		<% if(loginUser != null) { %>
 			$(function(){
 				$('.after-login').css("visibility","visible");
 			});

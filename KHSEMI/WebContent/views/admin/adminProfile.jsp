@@ -1,4 +1,4 @@
-<%@ page import="com.kh.member.model.vo.Member, com.kh.pet.model.vo.Pet"%>
+<%@ page import="com.kh.member.model.vo.Member, com.kh.pet.model.vo.Pet, com.kh.board.model.vo.Attachment, java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -6,6 +6,7 @@
 	Member loginUser = (Member) session.getAttribute("loginUser");
 	String alertMsg = (String) session.getAttribute("alertMsg");
 	Pet updatePet = (Pet) session.getAttribute("pet");
+	ArrayList<Attachment> list = (ArrayList<Attachment>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -54,13 +55,17 @@
         padding-right: 50px;
     }
     .profile_img{
-        background-image: url(resources/chatbot.png);
-        background-size: contain;
-        background-repeat: no-repeat;
         width: 80px;
         height: 80px;
-        border-radius: 100%;
+        border-radius: 70%;
         margin: 0 auto;
+        overflow: hidden;
+    }
+    #profile_img{
+    	width: 100%;
+    	height: 100%;
+   		object-fit: cover;
+   		margin: 0 auto;
     }
     .master_update{
         border: solid 1px gray;
@@ -94,14 +99,22 @@
 		int userNo =  loginUser.getUserNo();
 %>
 
-<div class="container">
+	<div class="container">
         <div class="item profile">
-            <div class="profile_img" style="background-color: gray;"></div>
-            <div style="font-weight: bold;">관리자님</div>
-            <div>
-                <input type="file" name="file" id="file">
-                <label for="file"  class="btn-upload">이미지 수정하기</label>
-            </div>
+        	<form class="master_profile_img" action="<%= contextPath %>/profileImg" method="post" enctype="multipart/form-data">
+	            <input type="hidden" name="userNo" value="<%= userNo %>">
+	            <div class="profile_img" style="background-color: gray;">
+	            	<img id="profile_img" src="<%= request.getContextPath() + list.get(0).getFilePath() + list.get(0).getChangeName()%>">
+	            </div>
+	            <div style="font-weight: bold;">관리자님</div>
+	            <div>
+	                <input type="file" name="file" id="file" onchange="loadImg(this)">
+	                <label for="file"  class="btn-upload">이미지 변경</label>
+	            </div>
+	            <div>
+	            	<button type="submit" class="btn-upload">변경하기</button>
+	            </div>
+        	</form>
         </div>
         <div class="item">
             <form class="master_update" action="<%=contextPath %>/adminProfile" method="post">
@@ -179,6 +192,19 @@
     		
     	});	
     
+    	function loadImg(input){
+    		
+    		if(input.files && input.files[0]){
+	    		var reader = new FileReader();
+	    		reader.onload = function(e){
+	    			document.getElementById('profile_img').src = e.target.result;
+	    		};
+	    		reader.readAsDataURL(input.files[0]);
+	    	} else {
+	    		document.getElementById('profile_img').src="resources/chatbot.png";
+	    	}
+    		
+    	}
     </script>
 
 
