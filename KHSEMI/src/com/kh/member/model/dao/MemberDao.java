@@ -216,8 +216,49 @@ public class MemberDao {
 		}
 		
 		return list;
+	}
+	
+	public ArrayList<Member> selectMemberList(Connection conn){
 		
+		ArrayList<Member> list = new ArrayList<>();
 		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMemberList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				Member m = new Member(rset.getInt("USER_NO"),
+						              rset.getString("USER_ID"),
+						              rset.getString("USER_PWD"),
+						              rset.getString("USER_NAME"),
+						              rset.getString("USER_NICKNAME"),
+						              rset.getString("PHONE"),
+						              rset.getString("EMAIL"),
+						              rset.getString("ADDRESS"),
+						              rset.getString("HOBBY"),
+						              rset.getDate("ENROLL_DATE"),
+						              rset.getDate("MODIFY_DATE"),
+						              rset.getString("STATUS"),
+						              rset.getString("SPECIES"));
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 }

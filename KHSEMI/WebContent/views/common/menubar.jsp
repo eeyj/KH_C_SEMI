@@ -28,7 +28,40 @@
 * {
 	font-family: 'Noto Sans KR', sans-serif;
 }
+html, body {height: 100%;}
+ #wrap {min-height: 100%; position: relative;}
+ #container {padding-bottom: 20px;} /* footer height */
+ .footer {
+     width: 100%; 
+     height: 100px; 
+     position: absolute; 
+     bottom: 0;
+ }
+ .footer>div{
+     display: inline-block;
+     vertical-align: middle;
+     color: rgb(158, 158, 158);
+     margin: 10px;
+ }
+ .footer2>div>li, .footer4>div>li{
+     list-style-type: none;
+     display: inline;
+     margin: auto;
+     text-decoration: none;
+     
+ }
 
+ .footer4{
+     float: right;
+     margin: 30px;
+ }
+ .footer2>div>li a{
+     color: rgb(158, 158, 158);
+     padding-right: 20px;
+ }
+ .footer4>div>li a{
+     padding-right: 9px;
+ }
 .nav-area {
 	background-color: #E6F2FF;
 	align-items: center;

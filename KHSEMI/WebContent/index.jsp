@@ -81,7 +81,7 @@
             <div class="main1_img" data-aos="fade-up"></div>
         </div>
         <div class="main2">
-            <h3>쓸말 없엉</h1>
+            <h3>쓸말 없엉</h3>
             <div class="video" data-aos="zoom-in">
                 <div class="video-container">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/X1Ddj5PXfIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                
@@ -115,7 +115,6 @@
 
     </script>
 
-
-<%@ include file="views/common/footer.jsp" %>
+<jsp:include page="views/common/footer.jsp"/>
 </body>
 </html>
