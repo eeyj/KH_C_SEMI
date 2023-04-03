@@ -39,12 +39,12 @@ public class AdminProfileController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		int userNo = loginUser.getUserNo();
-		ArrayList<Attachment> list = new ArrayList<>();
+		Attachment at = new MemberService().memberListImg(loginUser.getUserId());
 		
-		list = new MemberService().selectProfileImg(userNo);
-		
-		request.setAttribute("list", list);
+		if(at != null) {
+			loginUser.setFileName(at.getFilePath() + at.getChangeName());
+		}
+		System.out.println(loginUser);
 		
 		request.getRequestDispatcher("views/admin/adminProfile.jsp").forward(request, response);
 	}

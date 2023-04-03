@@ -6,7 +6,6 @@
 	Member loginUser = (Member) session.getAttribute("loginUser");
 	String alertMsg = (String) session.getAttribute("alertMsg");
 	Pet updatePet = (Pet) session.getAttribute("pet");
-	ArrayList<Attachment> list = (ArrayList<Attachment>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -97,6 +96,7 @@
 		String email = loginUser.getEmail();
 		String address = loginUser.getAddress();
 		int userNo =  loginUser.getUserNo();
+		String fileName = loginUser.getFileName();
 %>
 
 	<div class="container">
@@ -104,7 +104,11 @@
         	<form class="master_profile_img" action="<%= contextPath %>/profileImg" method="post" enctype="multipart/form-data">
 	            <input type="hidden" name="userNo" value="<%= userNo %>">
 	            <div class="profile_img" style="background-color: gray;">
-	            	<img id="profile_img" src="<%= request.getContextPath() + list.get(0).getFilePath() + list.get(0).getChangeName()%>">
+	            	<%if(fileName != null) { %>
+		            	<img id="profile_img" src="<%= request.getContextPath() %>/<%= fileName %>">
+	            	<% } else {  %>
+	            		<img id="profile_img" src="resources/profile_basic.png">
+	            	<% } %>
 	            </div>
 	            <div style="font-weight: bold;">관리자님</div>
 	            <div>

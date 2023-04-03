@@ -80,6 +80,8 @@ public class MemberDao {
 			}
 			
 		}
+		
+		System.out.println(m);
 		return m;
 		
 	}
