@@ -8,6 +8,7 @@ import com.kh.board.model.vo.Attachment;
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.pet.model.vo.Pet;
 
 public class MemberService {
 	
@@ -88,6 +89,26 @@ public class MemberService {
 		return list;
 		
 		
+	}
+	
+	public Member memberListDetail(String userId) {
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().selectMember(conn, userId);
+		
+		close(conn);
+		
+		return m;
+	}
+	
+	public Attachment memberListImg(String userId){
+		Connection conn = getConnection();
+		
+		Attachment at = new MemberDao().memberListImg(conn, userId);
+		
+		close(conn);
+		
+		return at;
 	}
 	
 }

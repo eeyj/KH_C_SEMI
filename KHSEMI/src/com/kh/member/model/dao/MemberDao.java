@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.kh.board.model.vo.Attachment;
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.member.model.vo.Member;
+import com.kh.pet.model.vo.Pet;
 
 public class MemberDao {
 
@@ -153,8 +154,8 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		return m;
 		
+		return m;
 		
 	}
 	
@@ -260,5 +261,40 @@ public class MemberDao {
 		}
 		return list;
 	}
+	
+	public Attachment memberListImg(Connection conn, String userId) {
+		
+		Attachment at = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("memberListImg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				at = new Attachment();
+				at.setFilePath(rset.getString("FILE_PATH"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return at;
+		
+		
+	}
+	
+	
 	
 }

@@ -53,10 +53,6 @@
 <%@ include file= "../../admin/adminMenubar.jsp" %>
 
 	<div class="container">
-	 	<div class="item profile">
-            <div class="profile_img" style="background-color: gray;"></div>
-            <div style="font-weight: bold;">관리자님</div>
-        </div>
 		<div class="item notice-detail">
             <h2 class="master_notice_title">공지사항 상세보기</h2>
             
