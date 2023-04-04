@@ -80,6 +80,10 @@
     .btn-area{
         text-align: center;
     }
+    #admin_profile_title{
+    	font-weight: bold;
+    	text-align: center;
+    }
    
 </style>
 </head>
@@ -116,14 +120,14 @@
 	                <label for="file"  class="btn-upload">이미지 변경</label>
 	            </div>
 	            <div>
-	            	<button type="submit" class="btn-upload">변경하기</button>
+	            	<button type="submit" class="btn-upload" id="admin_img_up">변경하기</button>
 	            </div>
         	</form>
         </div>
         <div class="item">
             <form class="master_update" action="<%=contextPath %>/adminProfile" method="post">
            		<input type="hidden" name="userNo" value="<%= userNo %>">
-                <h2>관리자님의 프로필</h2>
+                <h2 id="admin_profile_title">관리자님의 프로필</h2>
                 <br>
     	
                 <table class="profile_table">
@@ -172,7 +176,7 @@
     
                 <br>
                 <div class="btn-area">
-                    <button type="submit" class="btn btn-primary">수정하기</button>
+                    <button type="submit" class="btn btn-primary" id="update_profile">수정하기</button>
                     <button type="reset" class="btn btn-secondary">취소하기</button>
                 </div>
                 <br>
@@ -184,6 +188,11 @@
     </div>
     
     <script>
+   	 	$(function(){
+			$("#update_profile").submit(function(){
+				$("#admin_img_up").submit();
+			});
+	    
     	$(function(){
     		let pet = "<%= loginUser.getPet() == null ? "" : loginUser.getPet()%>";
     		

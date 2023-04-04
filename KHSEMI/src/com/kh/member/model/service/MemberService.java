@@ -111,4 +111,26 @@ public class MemberService {
 		return at;
 	}
 	
+	public String updateStatusM(String status, String userId) {
+		Connection conn = getConnection();
+		
+		
+		int result =  new MemberDao().updateStatusM(conn, userId, status);
+		
+		String updateStatus = null;
+		
+		if(result > 0) {
+			commit(conn);
+			
+			updateStatus = new MemberDao().selectStatus(conn, userId);
+			
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return updateStatus;
+	}
+	
 }

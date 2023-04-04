@@ -57,5 +57,16 @@
 		            ORDER BY FILE_NO DESC
 	</entry>
 	
+	<entry key="updateStatusM">
+		UPDATE MEMBER
+		SET STATUS = ?,
+			MODIFY_DATE = SYSDATE 
+		WHERE USER_ID = ?
+	</entry>
 	
+	<entry key="selectStatus">
+		SELECT STATUS
+		FROM MEMBER 
+		WHERE USER_ID = ?
+	</entry>
 </properties>

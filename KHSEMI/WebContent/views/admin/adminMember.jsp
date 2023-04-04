@@ -106,10 +106,16 @@
         }
         
         #modal_profile_img{
-    	width: 100%;
-    	height: 100%;
-   		object-fit: cover;
-   		margin: 0 auto;
+	    	width: 100%;
+	    	height: 100%;
+	   		object-fit: cover;
+	   		margin: 0 auto;
+    	}
+    	.member_table>tbody>tr:hover{
+    		cursor:pointer;
+    	}
+    	.close:hover{
+    		cursor:pointer;
     	}
 
 </style>
@@ -193,15 +199,25 @@
 	        					$("#modal_profile_img").attr('src',"resources/profile_basic.png");
 	        				}
 	        				$("#listUserName").val(result.userName);
-	        				$("#listUserNick").val(result.userNickname);
+	        				if((result.status) == 1){
+	        					$("#listUserStatus").val("가입");
+	        				}else if((result.status) == 2){
+	        					$("#listUserStatus").val("탈퇴");
+	        				}else if((result.status) == 3){
+	        					$("#listUserStatus").val("대기");
+	        				}else if((result.status) == 4){
+	        					$("#listUserStatus").val("거절");
+	        				}
 	        				$("#listUserId").val(result.userId);
 	        				$("#lsitAddress").val(result.address);
 	        				if((result.pet) == "dog" ){
 	        					$("#listUserPet").val("강아지");
 	        				}else if((result.pet) == "cat"){
 	        					$("#listUserPet").val("고양이");
-	        				}else{
+	        				}else if((result.pet) == "etc"){
 	        					$("#listUserPet").val("기타");
+	        				}else{
+	        					$("#listUserPet").val("없음");
 	        				}
 	        			},
 	        			error:function(){
@@ -228,37 +244,37 @@
                             </div>
                         </div>
                         <div class="item">
-                            <form class="member_info" action="" method="post">
-                                <table class="profile_table">
-                                    <tr>
-                                        <td>이름</td>
-                                        <td><input id="listUserName" type="text" name="userName" value="" readonly></td>
-                                    </tr>
-                                    <tr>
-                                        <td>닉네임</td>
-                                        <td><input id="listUserNick" type="text" name="userNick" value="" readonly></td>
-                                    </tr>
-                                    <tr>
-                                        <td>아이디</td>
-                                        <td><input id="listUserId" type="text" name="userId" value="" readonly></td>
-                                    </tr>
-                                    <tr>
-                                        <td>주소</td>
-                                        <td><input id="listAddress" type="text" name="address" value="" readonly></td>
-                                    </tr>
-                                    <tr>
-                                        <td>반려동물</td>
-                                        <td><input id="listUserPet" type="text" name="pet" value="" readonly></td>
-
-                                    </tr>
-                                </table>
-                                <br>
-                                <div class="modal_btn-area">
-                                    <button type="submit" class="btn btn-primary btn-sm">가입승인</button>
-                                    <button type="submit" class="btn btn-primary btn-sm">가입거절</button>
-                                    <button type="submit" class="btn btn-primary btn-sm">회원탈퇴</button>
-                                </div>
-                            </form>
+	                        <form class="member_info" action="<%= request.getContextPath() %>/update.am" method="post">
+		                        <table class="profile_table">
+		                            <tr>
+		                                <td>이름</td>
+		                                <td><input id="listUserName" type="text" name="userName" value="" readonly></td>
+		                            </tr>
+		                            <tr>
+		                                <td>가입승인</td>
+		                                <td><input id="listUserStatus" type="text" name="userStatus" value="" readonly></td>
+		                            </tr>
+		                            <tr>
+		                                <td>아이디</td>
+		                                <td><input id="listUserId" type="text" name="userId" value="" readonly></td>
+		                            </tr>
+		                            <tr>
+		                                <td>주소</td>
+		                                <td><input id="listAddress" type="text" name="address" value="" readonly></td>
+		                            </tr>
+		                            <tr>
+		                                <td>반려동물</td>
+		                                <td><input id="listUserPet" type="text" name="pet" value="" readonly></td>
+		
+		                            </tr>
+		                        </table>
+		                        <br>
+		                        <div class="modal_btn-area">
+		                            <button type="submit" name ="status" value="2" class="btn btn-primary btn-sm" >회원탈퇴</button>
+		                            <button type="submit" name ="status" value="1" class="btn btn-primary btn-sm">가입승인</button>
+		                            <button type="submit" name ="status" value="4" class="btn btn-primary btn-sm">가입거절</button>
+		                        </div>
+	                        </form>
                         </div>
                     </div>
                 </div>
@@ -279,8 +295,6 @@
                     $("#modal").css("display","none");
                 });
             });
-            
-          
 
         </script>
 

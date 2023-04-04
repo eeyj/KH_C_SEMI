@@ -81,7 +81,6 @@ public class MemberDao {
 			
 		}
 		
-		System.out.println(m);
 		return m;
 		
 	}
@@ -294,9 +293,61 @@ public class MemberDao {
 		}
 		return at;
 		
+	}
+	
+	public int updateStatusM(Connection conn, String userId, String status) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateStatusM");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
 		
 	}
 	
+	public String selectStatus(Connection conn, String userId) {
+		
+		String updateStatus = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				updateStatus = rset.getString("STATUS");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return updateStatus;
+	}
 	
 	
 }
