@@ -4,7 +4,6 @@
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member) session.getAttribute("loginUser");
-	String alertMsg = (String) session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -113,6 +112,9 @@ html, body {height: 100%;}
 	text-decoration : none;
 	color : black;
 }
+#profile_img{
+	width:80px;
+}
 
 </style>
 </head>
@@ -149,7 +151,13 @@ html, body {height: 100%;}
 			<div class="after-login">
 				<table>
 					<tr>
-						<td rowspan="3" width="100px"><img src="resources/profile_basic.png" width="80px"></td>
+						<td rowspan="3" width="100px">
+							<%if(loginUser.getFileName() != null) { %>
+			            		<img id="profile_img" src="<%= request.getContextPath() %>/<%= loginUser.getFileName() %>">
+		            		<% } else {  %>
+		            			<img id="profile_img" src="resources/profile_basic.png">
+		            		<% } %>	
+						</td>
 						<td colspan="2" width="50px" style="font-weight: bold; color: #FFD133;"><%= loginUser.getUserNickname() %>님</td>
 					</tr>
 					<tr>

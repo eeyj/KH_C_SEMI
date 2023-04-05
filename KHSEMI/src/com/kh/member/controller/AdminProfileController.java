@@ -70,10 +70,16 @@ public class AdminProfileController extends HttpServlet {
 			String userName = multi.getParameter("userName");
 			String userNickname = multi.getParameter("userNickname");
 			String userId = multi.getParameter("userId");
-			String userPwd = multi.getParameter("newPwd");
 			String email = multi.getParameter("email");
 			String address = multi.getParameter("address");
 			String pet = multi.getParameter("pet");
+			String fileName = multi.getParameter("fileName");
+			String userPwd = "";
+			if(multi.getParameter("newPwd").equals("")) {
+				userPwd = multi.getParameter("originPwd");
+			}else {
+				userPwd = multi.getParameter("newPwd");
+			}
 			
 			Member m = new Member();
 			m.setUserName(userName);
@@ -90,41 +96,33 @@ public class AdminProfileController extends HttpServlet {
 			Pet updatePet = new PetService().updatePet(p);
 			Member updateMem = new MemberService().updateMember(m);
 			
+			int result = 1;
 			Attachment at = new Attachment();
 			at.setOriginName(multi.getOriginalFileName(key));
 			at.setChangeName(multi.getFilesystemName(key));
 			at.setFilePath("/resources/profile_upfiles/");
 			
-			int result = new MemberService().insertProfileImg(userNo, at);
-			
-			if(updateMem == null) {
-				request.setAttribute("errorMsg", "관리자정보 수정 실패");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			if(multi.getOriginalFileName(key) != null) {
+				result = new MemberService().insertProfileImg(userNo, at);
+				updateMem.setFileName(at.getFilePath()+at.getChangeName());
 			} else {
+				updateMem.setFileName(fileName);
+			}
+			
+			if(result > 0) {
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", updateMem);
 				session.setAttribute("pet", updatePet);
-				session.setAttribute("alertMsg", "관리자정보 수정 성공");
 				
-				response.sendRedirect(request.getContextPath());
+				request.getRequestDispatcher("views/admin/adminProfile.jsp").forward(request, response);
 				
+			} else {
+				
+				request.setAttribute("errorMsg", "관리자정보 수정 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
-			
 		}
-		
-		
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 }

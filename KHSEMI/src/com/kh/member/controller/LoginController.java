@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.board.model.vo.Attachment;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
@@ -49,6 +50,8 @@ public class LoginController extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
+		Attachment at = new MemberService().memberListImg(userId);
+		
 		
 		if(loginUser == null) {
 			request.setAttribute("errorMsg", "로그인에 실패했습니다.");
@@ -57,10 +60,12 @@ public class LoginController extends HttpServlet {
 			
 			view.forward(request, response);
 		} else {
+			if(at != null) {
+				loginUser.setFileName(at.getFilePath()+at.getChangeName());
+			}
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("alertMsg", "로그인에 성공했습니다.");
 			
 			response.sendRedirect(request.getContextPath());
 		}

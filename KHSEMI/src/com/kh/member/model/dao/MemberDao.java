@@ -161,12 +161,11 @@ public class MemberDao {
 	
 	public int insertProfileImg(Connection conn, int userNo, Attachment at) {
 		
-		int result = 0;
+		int result = 1;
 		
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("insertProfileImg");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userNo);
@@ -182,7 +181,6 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
-		
 	}
 	
 	public ArrayList<Attachment> selectProfileImg(Connection conn, int userNo){

@@ -9,7 +9,7 @@
     .dog_land {
         background-image:url('resources/dog_run.gif');
         background-position:center;
-        background-repeat:repeat-x; /* 배경이미지 가로로 반복 */
+        background-repeat:repeat-x; 
         height: 400px;
         width: 100%;
     }
@@ -111,10 +111,10 @@
 
         setInterval(function(){
             $('.dog_land').css({ 'background-position' : '-=7' });
-        }, 20);
+        }, 80);
 
     </script>
 
-<jsp:include page="views/common/footer.jsp"/>
+
 </body>
 </html>

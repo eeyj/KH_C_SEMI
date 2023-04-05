@@ -50,7 +50,7 @@
     th, td{
         padding-top: 0px;
         padding-bottom: 20px;
-        padding-left: 20px;
+       /*  padding-left: 20px; */
         padding-right: 50px;
     }
     .profile_img{
@@ -84,7 +84,12 @@
     	font-weight: bold;
     	text-align: center;
     }
-   
+   	.check-danger{
+		color:#721c24;
+	}
+	.check-success{
+		color:#155724;
+	}
 </style>
 </head>
 <body>
@@ -100,6 +105,7 @@
 		String email = loginUser.getEmail();
 		String address = loginUser.getAddress();
 		int userNo =  loginUser.getUserNo();
+		String userPet = loginUser.getPet();
 		String fileName = loginUser.getFileName();
 %>
 
@@ -124,7 +130,6 @@
 	        </div>
 	        <div class="item">
 	            <div class="master_update" >
-	           		<input type="hidden" name="userNo" value="<%= userNo %>">
 	                <h2 id="admin_profile_title">관리자님의 프로필</h2>
 	                <br>
 	    	
@@ -141,13 +146,19 @@
 	                        <td>아이디</td>
 	                        <td><input type="text" name="userId" value="<%= userId %>" readonly></td>
 	                    </tr>
+	                     <tr>
+	                        <td>현재 비밀번호</td>
+	                        <td><input class="pwd" type="password" id="originPwd" name="originPwd" value="<%= userPwd %>"></td>
+	                    </tr>
 	                    <tr>
 	                        <td>신규 비밀번호</td>
-	                        <td><input type="password" id="newPwd" name="newPwd" value="<%= userPwd %>"></td>
+	                        <td><input class="pwd" type="password" id="newPwd" name="newPwd"></td>
 	                    </tr>
 	                    <tr>
 	                        <td>비밀번호 확인</td>
-	                        <td><input type="password" id="checkPwd"></td>
+	                        <td><input  class="pwd" type="password" id="checkPwd"></td>
+	                        <td class="check check-danger" id="check-danger">비밀번호가 일치하지 않습니다.</td>
+							<td class="check check-success" id="check-success">비밀번호가 일치합니다.</td>
 	                    </tr>
 	                    <tr>
 	                        <td>이메일</td>
@@ -166,6 +177,8 @@
 	                            <label for="cat">고양이</label>
 	                            <input type="radio" name="pet" id="etc" value="etc">
 	                            <label for="etc">기타</label>
+	                            <input type="radio" name="pet" id="none" value="none">
+	                            <label for="none">없음</label>
 	                        </td>
 	                    </tr>
 	                </table>
@@ -181,13 +194,30 @@
     </div>
     
     <script>
-   	 	$(function(){
-			$("#update_profile").submit(function(){
-				$("#admin_img_up").submit();
+		$(function(){
+			$("#check-danger").hide();
+			$("#check-success").hide();
+	
+			$(".pwd").keyup(function(){
+				var newPwd = $("#newPwd").val();
+				var checkPwd = $("#checkPwd").val();
+	
+				if(newPwd != "" || checkPwd != ""){
+					if(newPwd == checkPwd){
+						$("#check-success").show();
+						$("#check-danger").hide();
+						$("#update_profile").removeAttr("disabled");
+					}else{
+						$("#check-success").hide();
+						$("#check-danger").show();
+						$("#update_profile").attr("disabled", "disabled");
+					}
+				}
 			});
-	    
+		});
+    
     	$(function(){
-    		let pet = "<%= loginUser.getPet() == null ? "" : loginUser.getPet()%>";
+    		let pet = "<%= userPet == null ? "" : userPet%>";
     		
     		$("input[name='pet']").each(function(){
     			
