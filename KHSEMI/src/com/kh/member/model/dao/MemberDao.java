@@ -14,7 +14,6 @@ import java.util.Properties;
 import com.kh.board.model.vo.Attachment;
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.member.model.vo.Member;
-import com.kh.pet.model.vo.Pet;
 
 public class MemberDao {
 
