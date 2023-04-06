@@ -96,7 +96,7 @@
               <a class="nav-link" id="nav" href="<%= request.getContextPath()%>/admin_member">회원관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="nav" href="#">게시판관리</a>
+              <a class="nav-link" id="nav" href="<%= request.getContextPath()%>/allB">게시판관리</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="nav" href="<%= request.getContextPath() %>/list.no">공지사항관리</a>
