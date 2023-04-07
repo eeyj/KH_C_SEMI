@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
  	PageInfo pi = (PageInfo)request.getAttribute("pi"); 
-	ArrayList<Board> list = (ArrayList<Board>)session.getAttribute("list");
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 	
  	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -28,54 +28,18 @@
         .container {
             display: flex;
             justify-content: space-evenly;
-            /* align-items: flex-start;
-            padding: 10px; */
-           /*  width: 1000px; */
         }
 
         .allBoard_title {
-            border-bottom: #FFD133 solid;
             width: 250px;
             font-weight: bold;
-            text-align: center;
+            text-align: left;
         }
 
         .allBoard_list {
-            width: 750px;
+            width: 650px;
             padding: 0px 10px 0px 10px;
-            margin-top: 50px;
-        }
-        .all_search{
-            text-align: right;
-            text-decoration: none;
-        }
-        .all_search_text{
-            flex: 1 1 0px;
-            /* border: 0px; */
-            border-right: none;
-            padding: 11px 23px;
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 23px;
-            color: rgb(153, 153, 153);
-            border-radius: 10px 0px 0px 10px;
-        }
-        .all_search_button{
-            padding: 11px 33px;
-            margin: -2px;
-            flex: 0 0 fit-content;
-            background-color: rgb(83, 193, 243);
-            border-radius: 0px 10px 10px 0px;
-            font-style: normal;
-            font-weight: 700;
-            font-size: 18px;
-            line-height: 23px;
-            text-align: center;
-            color: rgb(255, 255, 255);
-        }
-        .serach_area{
-        	width: 1000px;
+            margin-top: 20px;
         }
        	.pagaeBtn{
    		    overflow-clip-margin: content-box;
@@ -102,22 +66,91 @@
 		    margin: 0;
 		    background-color: transparent;
     	}
+    	.category_swipperWrap{
+    		display: flex;
+    		justify-content: center;
+    	}
+    	.category_swipper{
+   		    width: 100%;
+   			margin: 0px;
+			box-sizing: content-box;
+    	}
+    	.category_button{
+    		padding: 9px;
+		    background: rgb(226, 226, 226);
+		    border: 1.5px solid rgb(255, 255, 255);
+		    border-radius: 10px 10px 0px 0px;
+		    font-style: normal;
+		    font-weight: 900;
+		    font-size: 18px;
+		    line-height: 23px;
+		    text-align: center;
+		    color: rgb(102, 102, 102);
+		    white-space: nowrap;
+		    width: 250px;
+    		max-width: 100%;
+    		
+    	}
+    	.category_button:hover{
+    		background-color: rgb(83, 193, 243);
+    		color: white;
+    	}
+    	.current{
+    		background-color: rgb(83, 193, 243);
+    		color: white;
+    	}
 </style>
 </head>
 <body>
 
 <%@ include file= "adminMenubar.jsp" %>
-
-
+	
+	  <script>
+        	$(function(){
+        		var cp = $(location).attr('search');
+        		var clist = $("button[name='category']");
+        		
+        		if(cp == '?type=3'){
+        			clist[3].addClass("current");
+        		} else if(cp == '?type=2' ){
+        			clist[2].addClass("current");
+        		} else if(cp == '?type=1' ){
+        			clist[1].addClass("current");
+        		}else{
+        			clist[0].addClass("current");
+        		}
+        	});
+        
+        </script>
+	
+	
+		
   <div class="container">
         <div class="item">
 	        <div class="serach_area">
-	            <h2 class="allBoard_title">게시글 관리</h2>
-	            <div class="all_search">
-	                <input class="all_search_text" type="text" placeholder="검색어를 입력해주세요">
-	                <button class="all_search_button">검색</button>
-	            </div>        
+	            <h2 class="allBoard_title">게시판 관리</h2>
+	            <div class="category_swipperWrap mt-5">
+	            	<div class="category_swiper"><button class="category_button" type="button" name="category" value="4">전체보기</button></div>
+	            	<div class="category_swiper"><button class="category_button" type="button" name="category" value="1">같이걷개</button></div>
+	            	<div class="category_swiper"><button class="category_button" type="button" name="category" value="2">멍냥수다</button></div>
+	            	<div class="category_swiper"><button class="category_button" type="button" name="category" value="3">나눔&거래</button></div>
+	            </div>
 	        </div>
+	       
+	       	<script>
+	       		$(function(){
+	       			$("button[name='category']").on("click", function(){
+	       				if($(this).val() != 4){
+		       				location.href = "<%= request.getContextPath() %>/typeB?type="+ $(this).val();
+	       				}else{
+	       					location.href = "<%= request.getContextPath() %>/allB";
+	       				}
+	       			});
+	       		});
+	       	</script>
+	       
+	       
+	       
 	        <div>
 	            <table class="allBoard_list table table-hover">
 	                <thead>
@@ -165,6 +198,7 @@
 	        </div>
         </div>
         
+      
         
         
         
@@ -193,16 +227,7 @@
 			<img class="pagaeBtn next" src="https://sscampus.kr/images/notice/page-indicator-caret.png">
 		</button>
 		
-		
-		
 	</div>
-
-
-
-
-
-
-
 
 </body>
 </html>

@@ -209,7 +209,7 @@
 	        					$("#listUserStatus").val("거절");
 	        				}
 	        				$("#listUserId").val(result.userId);
-	        				$("#lsitAddress").val(result.address);
+	        				$("#listAddress").val(result.address);
 	        				if((result.pet) == "dog" ){
 	        					$("#listUserPet").val("강아지");
 	        				}else if((result.pet) == "cat"){

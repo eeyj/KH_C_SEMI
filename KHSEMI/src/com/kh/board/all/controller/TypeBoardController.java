@@ -14,16 +14,16 @@ import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.PageInfo;
 
 /**
- * Servlet implementation class AllBoardController
+ * Servlet implementation class TypeBoardController
  */
-@WebServlet("/allB")
-public class AllBoardController extends HttpServlet {
+@WebServlet("/typeB")
+public class TypeBoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllBoardController() {
+    public TypeBoardController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +32,9 @@ public class AllBoardController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		int type = Integer.parseInt(request.getParameter("type"));
+
 		int listCount; 
 		int currentPage; 
 		int pageLimit; 
@@ -42,7 +44,7 @@ public class AllBoardController extends HttpServlet {
 		int startPage; 
 		int endPage;
 		
-		listCount = new AllBoardService().selectAllListCount();
+		listCount = new AllBoardService().selectTypeListCount(type);
 		
 		currentPage = Integer.parseInt( request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage") );
 		
@@ -62,13 +64,12 @@ public class AllBoardController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		// 내꺼		
-		ArrayList<Board> list = new AllBoardService().selectAllBoardList(pi);
+		ArrayList<Board> list = new AllBoardService().selectTypeBoardList(type, pi);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		
 		request.getRequestDispatcher("views/admin/allBoard.jsp").forward(request, response);
+		
 		
 	}
 
