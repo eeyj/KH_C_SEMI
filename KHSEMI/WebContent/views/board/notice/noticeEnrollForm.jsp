@@ -60,7 +60,7 @@
 
  	<div class="container">
         <div class="item notice">
-            <h2 class="master_notice_title">공지사항 작성하기</h2>
+            <h2 class="master_notice_title">공지사항 관리</h2>
             <form action="<%= request.getContextPath() %>/insert.no" method="post" style="border: 1px solid gray;">
                 <input type="hidden" name="userNo" value="<%= loginUser.getUserNo()%>">
                 <table class="notice_enroll">
@@ -74,8 +74,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <textarea class="notice-content" name="content" rows="10" style="resize:none;" required >
-                            </textarea>
+<textarea class="notice-content" name="content" rows="10" style="resize:none;" required ></textarea>
                         </td>
                     </tr>
                 </table>

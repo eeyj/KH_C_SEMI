@@ -40,6 +40,7 @@
             width: 650px;
             padding: 0px 10px 0px 10px;
             margin-top: 20px;
+            border-top: 2px solid rgb(83, 193, 243);
         }
        	.pagaeBtn{
    		    overflow-clip-margin: content-box;
@@ -126,7 +127,7 @@
 	
 		
   <div class="container">
-        <div class="item">
+        <div class="item mt-3">
 	        <div class="serach_area">
 	            <h2 class="allBoard_title">게시판 관리</h2>
 	            <div class="category_swipperWrap mt-5">

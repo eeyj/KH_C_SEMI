@@ -134,7 +134,7 @@ html, body {height: 100%;}
 						<td colspan="2" width="50px" style="font-weight: bold; color: #FFD133;"></td>
 					</tr>
 					<tr>
-						<td colspan="2">마이페이지</td>
+						<td colspan="2"><a href="<%= contextPath%>/mypageTest">마이페이지</a></td>
 					</tr>
 					<tr>
 						<td><a href=""><img src="resources/notification.png" width="25px"></a></td>
