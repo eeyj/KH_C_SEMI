@@ -58,6 +58,7 @@
     .noticeContentWrap{
         padding: 25px 10px;
         line-height: 1.6;
+        height: 350px;
     }
     .noticeContentWrap>p{
    	    display: block;

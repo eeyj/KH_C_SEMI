@@ -102,9 +102,6 @@ public class AdminProfileController extends HttpServlet {
 			at.setChangeName(multi.getFilesystemName(key));
 			at.setFilePath("/resources/profile_upfiles/");
 			
-			System.out.println(at);
-			
-			
 			if(multi.getOriginalFileName(key) != null) {
 				result = new MemberService().insertProfileImg(userNo, at);
 				updateMem.setFileName(at.getFilePath()+at.getChangeName());

@@ -115,6 +115,19 @@ html, body {height: 100%;}
 #profile_img{
 	width:80px;
 }
+.note-num {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    text-align: center;
+    background-color: red;
+    border-radius: 15px;
+    display: inline-block;
+}
 
 </style>
 </head>
@@ -161,7 +174,7 @@ html, body {height: 100%;}
 						<td colspan="2" width="50px" style="font-weight: bold; color: #FFD133;"><%= loginUser.getUserNickname() %>님</td>
 					</tr>
 					<tr>
-						<td colspan="2"><a href="">마이페이지</a></td>
+						<td colspan="2"><a href="<%=request.getContextPath()%>/Mypage.me">마이페이지</a></td>
 					</tr>
 					<tr>
 						<td><a href=""><img src="resources/notification.png" width="25px"></a></td>

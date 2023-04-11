@@ -1,8 +1,14 @@
-<%@ page import="java.util.ArrayList, com.kh.board.model.vo.Board"%>
+<%@ page import="java.util.ArrayList, com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage(); 
 %>
 <!DOCTYPE html>
 <html>
@@ -43,6 +49,31 @@
         	flex-direction: row;
         	
         }
+         	.pagaeBtn{
+   		    overflow-clip-margin: content-box;
+   			overflow: clip;
+   			width: 26px;
+		    height: 26px;
+		    background-color: transparent;
+		    border:none;
+       	}
+       	.prev{
+       		transform: rotate(180deg);
+       	}
+       	.pagingArea{
+       		margin: 25px auto 0px;
+   		    display: flex;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    column-gap: 30px;
+		    justify-content: center;
+       	}
+       	.pagingArea>button{
+       	    border: 0;
+		    padding: 0;
+		    margin: 0;
+		    background-color: transparent;
+    	}
       
 </style>
 
@@ -106,6 +137,31 @@
 		
 	
 	</script>
+	
+	<!-- 페이징바 영역  -->
+    <div class="pagingArea">
+		
+		<button onclick="location.href='<%=request.getContextPath()%>/list.no?currentPage=<%= currentPage - 1%>'">
+			<img class="pagaeBtn prev" src="https://sscampus.kr/images/notice/page-indicator-caret.png">
+		</button>
+		
+		<% for(int i = startPage; i<=endPage; i++) { %>
+			
+			<% if(i != currentPage) { %>
+				<button onclick="location.href='<%=request.getContextPath()%>/list.no?currentPage=<%= i %>';"><%= i %></button>
+			<% } else {%>
+				<button disabled><%= i %></button>
+			<% } %>
+		<% } %>
+		
+		
+		<button onclick="location.href='<%= request.getContextPath()%>/list.no?currentPage=<%= currentPage + 1%>'">
+			<img class="pagaeBtn next" src="https://sscampus.kr/images/notice/page-indicator-caret.png">
+		</button>
+		
+	</div>
+	
+	
 	
 	
 <jsp:include page="../../common/footer.jsp"/>

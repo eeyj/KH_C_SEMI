@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.kh.board.model.vo.Attachment;
+import com.kh.board.model.vo.Board;
+
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
@@ -131,6 +133,18 @@ public class MemberService {
 		close(conn);
 		
 		return updateStatus;
+	}
+	
+	public ArrayList<Board> myPageBoardList(int userNo){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDao().myPageBoardList(conn, userNo);
+		
+		close(conn);
+		
+		return list;
+		
 	}
 	
 }

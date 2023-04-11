@@ -12,6 +12,8 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Attachment;
+import com.kh.board.model.vo.Board;
+
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.member.model.vo.Member;
 
@@ -346,5 +348,40 @@ public class MemberDao {
 		return updateStatus;
 	}
 	
-	
+	public ArrayList<Board> myPageBoardList(Connection conn, int userNo){
+		
+		ArrayList<Board> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("myPageBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Board b = new Board();
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardWriter(rset.getString("USER_NICKNAME"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setCreateDate(rset.getDate("CREATE_DATE"));
+				b.setCount(rset.getInt("COUNT"));
+				
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+	}
 }
