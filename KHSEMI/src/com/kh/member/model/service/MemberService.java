@@ -135,16 +135,5 @@ public class MemberService {
 		return updateStatus;
 	}
 	
-	public ArrayList<Board> myPageBoardList(int userNo){
-		
-		Connection conn = getConnection();
-		
-		ArrayList<Board> list = new MemberDao().myPageBoardList(conn, userNo);
-		
-		close(conn);
-		
-		return list;
-		
-	}
 	
 }

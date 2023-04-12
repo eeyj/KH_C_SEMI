@@ -28,39 +28,7 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 html, body {height: 100%;}
- #wrap {min-height: 100%; position: relative;}
- #container {padding-bottom: 20px;} /* footer height */
- .footer {
-     width: 100%; 
-     height: 100px; 
-     position: absolute; 
-     bottom: 0;
- }
- .footer>div{
-     display: inline-block;
-     vertical-align: middle;
-     color: rgb(158, 158, 158);
-     margin: 10px;
- }
- .footer2>div>li, .footer4>div>li{
-     list-style-type: none;
-     display: inline;
-     margin: auto;
-     text-decoration: none;
-     
- }
 
- .footer4{
-     float: right;
-     margin: 30px;
- }
- .footer2>div>li a{
-     color: rgb(158, 158, 158);
-     padding-right: 20px;
- }
- .footer4>div>li a{
-     padding-right: 9px;
- }
 .nav-area {
 	background-color: #E6F2FF;
 	align-items: center;
@@ -174,7 +142,11 @@ html, body {height: 100%;}
 						<td colspan="2" width="50px" style="font-weight: bold; color: #FFD133;"><%= loginUser.getUserNickname() %>님</td>
 					</tr>
 					<tr>
-						<td colspan="2"><a href="<%=request.getContextPath()%>/Mypage.me">마이페이지</a></td>
+						<% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
+							<td colspan="2"><a href="<%=contextPath%>/adminProfile">마이페이지</a></td>
+						<% }else{ %>
+							<td colspan="2"><a href="<%=request.getContextPath()%>/Mypage.me">마이페이지</a></td>
+						<% } %>
 					</tr>
 					<tr>
 						<td><a href=""><img src="resources/notification.png" width="25px"></a></td>
@@ -202,12 +174,7 @@ html, body {height: 100%;}
 			<li class="nav-item"><a class="nav-link" id="nav" href="#">같이걷개</a></li>
 			<li class="nav-item"><a class="nav-link" id="nav" href="#">멍냥수다</a></li>
 			<li class="nav-item"><a class="nav-link" id="nav" href="#">나눔&거래</a></li>
-			
-			<% if(loginUser != null && loginUser.getUserId().equals("admin")) { %>
-			<li class="nav-item"><a class="nav-link" id="nav" href="<%=contextPath%>/adminProfile">대빵용</a></li>
-			<% } else { %>
-			<li class="nav-item"><a class="nav-link disabled" id="nav" style="color: gray;">대빵용</a></li>
-			<% } %>
+			<li class="nav-item"><a class="nav-link" id="nav" href="<%=request.getContextPath()%>/dbti">DBTI</a></li>
 		</ul>
 	</div>
 	
