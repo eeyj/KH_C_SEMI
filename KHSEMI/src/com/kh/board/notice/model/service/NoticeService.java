@@ -115,5 +115,30 @@ public class NoticeService {
 		return result;
 		
 	}
+	
+	public ArrayList<Board> selectMainNotice(){
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new NoticeDao().selectMainNotice(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+	
+
+	public ArrayList<Board> selectMainBoard(){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new NoticeDao().selectMainBoard(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	} 
+	
 
 }

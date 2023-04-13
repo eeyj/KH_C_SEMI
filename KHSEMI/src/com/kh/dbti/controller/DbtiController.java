@@ -1,4 +1,4 @@
-package com.dbti.controller;
+package com.kh.dbti.controller;
 
 import java.io.IOException;
 

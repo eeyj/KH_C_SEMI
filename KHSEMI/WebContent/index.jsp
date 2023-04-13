@@ -200,6 +200,44 @@ a {
 <body>
 	<%@ include file="views/common/menubar.jsp"%>
 
+	<script>
+		$(function(){
+			$.ajax({
+				type:"get",
+				async:false,
+				url:"<%=request.getContextPath()%>/main.no",
+				success:function(result){
+					let str = "";
+					for(let i = 0; i<result.length; i++){
+						str += "<li class='notice_list'>"
+							+"<div class='noticeDate'>" + result[i].createDate + "</div>"
+							+"<div class='noticeTitle'>" + result[i].boardTitle + "</div>"
+							+ "</li>"
+					}
+					$(".notice_lists").html(str);
+				}
+			});
+		});
+	
+	</script>
+	
+	<script>
+		$(function(){
+			$.ajax({
+				type:"get",
+				async:false,
+				url:"<%=request.getContextPath()%>/main.bo",
+				success:function(result){
+					console.log(result);
+					
+					return result;		
+				}
+			});
+		});
+	
+	</script>
+
+
 	<div class="main-content">
 		<div class="main1">
 			<div class="main1-text" data-aos="fade-up">
@@ -211,20 +249,7 @@ a {
 			<div class="main2_wrap">
 				<div class="main2_title">공지사항</div>
 				<div>
-					<ul class="notice_lists">
-						<li class="notice_list">
-							<div class="noticeDate">2022.04.04</div>
-							<div class="noticeTitle">공지사항 제목임다</div>
-						</li>
-						<li class="notice_list">
-							<div class="noticeDate">2022.04.04</div>
-							<div class="noticeTitle">공지사항 제목임다</div>
-						</li>
-						<li class="notice_list">
-							<div class="noticeDate">2022.04.04</div>
-							<div class="noticeTitle">공지사항 제목임다</div>
-						</li>
-					</ul>
+					<ul class="notice_lists"></ul>
 				</div>
 			</div>
 		</div>
@@ -240,11 +265,6 @@ a {
 							<div class="cards">
 								<div class="imgWrap mt-3">
 									<img src="resources/산책.jpg" class="cardImg">
-								</div>
-								<div class="cardContent">
-									<div class="card-title">게시판 제목이 길어서 짤리면
-										어카지.................러안러이ㅏㅓㄴ링나런어라ㅣㅇ너리ㅓㅇ나런아렁나ㅓ라ㅣㄴ어랑너리ㅏㅇㄴ러ㅏㅇ러ㅏㅣㄴㅇ러ㅏ........</div>
-									<div class="card-writer">작성자</div>
 									<a href="#" class="btn btn-outline-warning btn-sm my-3">같이걷개</a>
 								</div>
 							</div>
@@ -255,11 +275,6 @@ a {
 							<div class="cards">
 								<div class="imgWrap mt-3">
 									<img src="resources/산책.jpg" class="cardImg">
-								</div>
-								<div class="cardContent">
-									<div class="card-title">게시판 제목이 길어서 짤리면
-										어카지.................러안러이ㅏㅓㄴ링나런어라ㅣㅇ너리ㅓㅇ나런아렁나ㅓ라ㅣㄴ어랑너리ㅏㅇㄴ러ㅏㅇ러ㅏㅣㄴㅇ러ㅏ........</div>
-									<div class="card-writer">작성자</div>
 									<a href="#" class="btn btn-outline-warning btn-sm my-3">같이걷개</a>
 								</div>
 							</div>
@@ -270,11 +285,6 @@ a {
 							<div class="cards">
 								<div class="imgWrap mt-3">
 									<img src="resources/산책.jpg" class="cardImg">
-								</div>
-								<div class="cardContent">
-									<div class="card-title">게시판 제목이 길어서 짤리면
-										어카지.................러안러이ㅏㅓㄴ링나런어라ㅣㅇ너리ㅓㅇ나런아렁나ㅓ라ㅣㄴ어랑너리ㅏㅇㄴ러ㅏㅇ러ㅏㅣㄴㅇ러ㅏ........</div>
-									<div class="card-writer">작성자</div>
 									<a href="#" class="btn btn-outline-warning btn-sm my-3">같이걷개</a>
 								</div>
 							</div>
@@ -285,11 +295,6 @@ a {
 							<div class="cards">
 								<div class="imgWrap mt-3">
 									<img src="resources/산책.jpg" class="cardImg">
-								</div>
-								<div class="cardContent">
-									<div class="card-title">게시판 제목이 길어서 짤리면
-										어카지.................러안러이ㅏㅓㄴ링나런어라ㅣㅇ너리ㅓㅇ나런아렁나ㅓ라ㅣㄴ어랑너리ㅏㅇㄴ러ㅏㅇ러ㅏㅣㄴㅇ러ㅏ........</div>
-									<div class="card-writer">작성자</div>
 									<a href="#" class="btn btn-outline-warning btn-sm my-3">같이걷개</a>
 								</div>
 							</div>
@@ -300,11 +305,6 @@ a {
 							<div class="cards">
 								<div class="imgWrap mt-3">
 									<img src="resources/산책.jpg" class="cardImg">
-								</div>
-								<div class="cardContent">
-									<div class="card-title">게시판 제목이 길어서 짤리면
-										어카지.................러안러이ㅏㅓㄴ링나런어라ㅣㅇ너리ㅓㅇ나런아렁나ㅓ라ㅣㄴ어랑너리ㅏㅇㄴ러ㅏㅇ러ㅏㅣㄴㅇ러ㅏ........</div>
-									<div class="card-writer">작성자</div>
 									<a href="#" class="btn btn-outline-warning btn-sm my-3">같이걷개</a>
 								</div>
 							</div>
@@ -384,7 +384,7 @@ a {
 		function moveSlide(num) {
 			slides.style.left = -num * (slideWidth + slideMargin) + 'px';
 			currentIndx = num;
-			console.log(currentIndx, slideCount);
+			
 			if (currentIndx == slideCount || currentIndx == -slideCount) {
 
 				setTimeout(function() {
